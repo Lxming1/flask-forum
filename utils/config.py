@@ -1,0 +1,7 @@
+HOST = '127.0.0.1'
+PORT = '5000'
+MYSQL_HOST = 'localhost'
+MYSQL_USER = 'root'
+MYSQL_PASSWORD = 'root'
+MYSQL_DATABASES = 'pycoderhub'
+SECRET_KEY = b'_5#y2L"F4Q8z\n\xec]/'

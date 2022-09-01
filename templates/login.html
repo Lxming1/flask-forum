@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>无名论坛 - 登录页</title>
+    <link rel="shortcut icon" href="../static/img/favicon.png">
+    <link rel="stylesheet" href="../static/css/user.css">
+</head>
+<body>
+    <div class="loginBox">
+        <div class="loginTitle" >无名论坛</div>
+        <div class="loginForm" style="height: 230px;">
+            <h3 style="text-align: center; color: #00adeb">用户登录</h3>
+                <form action="/login" method="post" class="FormItem login">
+                <div class="textfield">
+                    <label>
+                        <span class="label">用户名</span>
+                        {{ form.username }}
+                    </label>
+                </div>
+                <div class="textfield">
+                   <label>
+                       <span class="label">密码</span>
+                       {{ form.password }}
+                    </label>
+                </div>
+                <div class="btn">
+                    <input type="reset" class="btnDefault" value="重置"/>
+                    {{ form.hidden_tag() }}
+                    {{ form.submit }}
+                </div>
+            </form>
+            <div class="registerBox">
+                <a class="registerBtn" href="/register">快速注册</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        const mes = {{ get_flashed_messages() | tojson }};
+        if (mes.length > 0){
+            alert(mes[0])
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}
+    {% endblock %}</title>
+    <link rel="shortcut icon" href="../static/img/favicon.png">
+    <link rel="stylesheet" href="../static/css/home.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+</head>
+<body>
+<div id="app">
+    <div class="header">
+        <div class="headerBox">
+            <div class="mainTitle" onclick="window.location.replace('/')">无名论坛</div>
+            <div class="navBar">
+                <ul class="navBarUl">
+                    <li class="navBarItem">
+                        <a href="/" class="aItem">首页</a>
+                    </li>
+                    <li class="navBarItem">
+                        <a href="/profile" class="aItem">我的动态</a>
+                    </li>
+                </ul>
+            </div>
+            <form action="/search" class="search" method="post">
+                <label for="searchItem">
+                    <select name="searchItem" id="searchItem">
+                        <option value="content" selected>内容</option>
+                        <option value="label">标签</option>
+                        <option value="username">用户</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="text" placeholder="搜索你感兴趣的内容..." name="content">
+                </label>
+                <button type="submit" onclick="window.sessionStorage.setItem('currentHeight', 0)">搜索</button>
+            </form>
+            <img src="{{ session['avatar_url'] }}" alt="{{ session['username'] }}" class="avatar">
+        </div>
+    </div>
+    <div class="content">
+        <div id="bg"></div>
+        {% block content %}{% endblock %}
+        <div class="contentRight">
+            <div class="userMes">
+                <div style="border: 1px solid #ccc">
+                    <div class="homeAvatar">
+                        <img src="{{ session['avatar_url'] }}" alt="{{ session['username'] }}">
+                    </div>
+                </div>
+                <div class="rightUserMes">
+                    <div style="text-align: center">
+                        {{ session['username'] }}
+                    </div>
+                    <form action="/logout" method="post">
+                        <button type="submit" class="btnDefault"
+                                style="background-color:rgb(251, 114, 153); border-color: rgb(251, 114, 153); color: #fff">退出登录
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="editUserAvatarBox">
+                <div class="showDialogBtn">
+                    <button class="showDialog btnDefault">发表动态</button>
+                    <button class="btnDefault editUserBtn">编辑资料</button>
+                    <button class="btnDefault changeAvatar">更换头像</button>
+                </div>
+            </div>
+        </div>
+        <div class="cover"></div>
+        {#        发表动态dialog         #}
+        <div class="createMomentDialog dialogDefault">
+            <div class="closeDialogBox">
+                <div class="closeDialog"></div>
+            </div>
+            <form action="/createMoment" method='post'>
+                <h3 class="createTitle">新建动态</h3>
+                <div style="padding: 20px">
+                    <span class="createLabel">动态内容</span>
+                    <div class="textfield">
+                        {{ momentForm.content }}
+                    </div>
+                    <span class="createLabel">动态标签</span>
+                    <div class="textfield">
+                        {{ momentForm.labels }}
+                    </div>
+                    {{ momentForm.hidden_tag() }}
+                    <div class="submitMoment">
+                        <button class="btnDefault"
+                                type="button"
+                                style="background-color:#8f9298;border-color: #8f9298;margin-right: 20px;"
+                                onclick="document.getElementsByClassName('closeDialogBox')[0].click()">
+                            取消
+                        </button>
+                        {{ momentForm.submit }}
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        {#        编辑资料dialog         #}
+        <div class="editUserDialog dialogDefault">
+            <div class="closeDialogBox">
+                <div class="closeDialog"></div>
+            </div>
+            <h3 class="createTitle">编辑资料</h3>
+            <form action="/editUser" method='post' class="editUserForm">
+                <label for="username">
+                    用户名
+                    <input type="text" name="username" value="{{ session['username'] }}" class="editUserInput"
+                           style="width: 200px">
+                </label>
+                <label for="password">
+                    原密码
+                    <input type="password" name="beforePas" class="editUserInput" style="width: 200px"
+                           placeholder="请输入原密码">
+                </label>
+                <label for="password">
+                    新密码
+                    <input type="password" name="afterPas" class="editUserInput" style="width: 200px"
+                           placeholder="请输入新密码">
+                </label>
+                <div class="editUserFormBtn">
+                    <button class="btnDefault"
+                            style="background-color:#8f9298;border-color: #8f9298;margin-right: 20px;"
+                            type="button"
+                            onclick="document.getElementsByClassName('closeDialogBox')[1].click()">
+                        取消
+                    </button>
+                    <button class="submitEditUser btnDefault" type="submit">提交</button>
+                </div>
+            </form>
+        </div>
+
+        {#        更换头像dialog         #}
+        <div class="editAvatarDialog dialogDefault" style="display: none">
+            <div class="closeAvatarDialog">
+                <div class="closeDialog"></div>
+            </div>
+            <h3 class="createTitle">更换头像</h3>
+            <form action="/upload_avatar"
+                  method="post"
+                  enctype="multipart/form-data"
+                  class="editUserAvatarForm">
+                <div class="showAvatar">
+                    <img src="{{ session['avatar_url'] }}" class="show" alt="">
+                </div>
+                <div>
+                    <input type="file"
+                           class="editAvatar"
+                           value="更换头像"
+                           style="display: none"
+                           name="avatar"
+                           accept="image/png, image/jpeg, image/gif, image/jpg"
+                           onchange="changepic()">
+                    <div class="editUserAvatar">
+                        <button style="font-size: 13px; width: 115px;" class="btnDefault" type="button">
+                            点击更换头像
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <button class="btnDefault"
+                            type="button"
+                            style="background-color:#8f9298;border-color: #8f9298;margin-right: 20px;"
+                            onclick="removeSelectAvatar()">
+                        取消
+                    </button>
+                    <button class="btnDefault" type="submit">保存</button>
+                </div>
+            </form>
+        </div>
+        <div class="goTop">
+            <img src="../static/img/go_top.png" alt="回到顶部">
+        </div>
+
+    </div>
+    <div class="footer"></div>
+</div>
+{% block script %}
+{% endblock %}
+<script src="../static/js/main.js"></script>
+<script>
+    const mes = {{ get_flashed_messages() | tojson }};
+    if (mes.length > 0) {
+        alert(mes[0])
+    }
+    const imgInput = document.getElementsByClassName('editAvatar')[0]
+    const showImg = document.getElementsByClassName('show')[0]
+    const avatar = document.getElementsByClassName('avatar')[0]
+
+    function changepic() {
+        const reads = new FileReader();
+        img = imgInput.files[0];
+        console.log(imgInput.value)
+        reads.readAsDataURL(img);
+        reads.onload = function (e) {
+            showImg.src = this.result;
+        };
+    }
+
+    function removeSelectAvatar() {
+        showImg.src = avatar.src;
+        imgInput.value = ''
+        document.getElementsByClassName('closeAvatarDialog')[0].click()
+    }
+</script>
+</body>
+</html>

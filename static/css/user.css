@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: url("../img/sign_bg.png");
+    background-repeat: no-repeat;
+    background-color: #b8e5f8;
+    background-size: cover;
+}
+.loginBox{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 1px 3px rgb(18 18 18 / 10%);
+}
+.loginTitle{
+    color: #00adeb;
+    font-weight: bolder;
+    font-size: 50px;
+    font-family: "STXingkai", serif;
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    width: 200px;
+    transform: translate(-50%);
+}
+.loginForm{
+    display: inline-block;
+    width: 340px;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    background-color: #fff;
+}
+.btn input{
+    margin: 0 10px;
+}
+.textfield input{
+    -webkit-appearance:none;
+    -moz-appearance: none;
+    outline: 0;
+    height: 34px;
+    padding: 0 10px;
+    border-radius: 20px;
+    border: 1px solid #c8cccf;
+    color: #121212;
+    width: 250px;
+}
+.textfield input:focus{
+    border: 1px solid #8a8787;
+}
+.textfield span{
+    width: 56px;
+    text-align: center;
+    display: inline-block;
+}
+.textfield{
+    margin: 12px 0;
+}
+.btn{
+    padding-top: 10px;
+    display: block;
+    text-align: center;
+}
+.FormItem{
+    margin-top: 20px;
+    overflow: hidden;
+    margin-left: 5px;
+}
+.registerBox{
+    margin-top: 25px;
+    text-align: center;
+}
+.registerBtn{
+    font-size: 12px;
+    text-decoration: none;
+    color: #00adeb;
+    cursor: pointer;
+}
+.btnDefault{
+    background-color: #00adeb;
+    color: #f4f4f4;
+    border: 1px solid #00adeb;
+    border-radius: 5px;
+    padding: 4px 15px;
+    cursor: pointer;
+}
+.label{
+    font-size: 14px;
+}
+.tip{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ff5c5c;
+}

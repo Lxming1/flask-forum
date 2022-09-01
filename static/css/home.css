@@ -1,0 +1,335 @@
+.title{
+    padding: 15px;
+    width: 694px;
+    box-sizing: border-box;
+    font-weight: bold;
+    background-color: #fff;
+    border-radius: 4px;
+    display: flex;
+    position: absolute;
+    z-index: 1;
+    justify-content: space-between;
+    box-shadow: 0 1px 3px rgb(18 18 18 / 10%);
+}
+.userHead{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+.momentAvatar{
+    height: 50px;
+    width: 50px;
+    border-radius:5px;
+    overflow: hidden;
+}
+.momentAvatar img{
+    height: 100%;
+    width: 100%;
+}
+.user{
+    margin-left: 20px;
+}
+.time{
+    font-size: 12px;
+    color: #848fa5;
+}
+.contentValue{
+    padding: 15px;
+    color: #121212;
+}
+.item{
+    border-bottom: 1px solid #f0f2f7;
+    position: relative;
+    padding: 20px 20px 10px 20px;
+    background-color: #fff;
+    margin-top: 8px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgb(18 18 18 / 10%);
+}
+.contentLeft{
+    width: 694px;
+    display: inline-block;
+    background-color: transparent;
+    min-height: calc(100vh - 164px);
+    position: relative;
+    /*margin-top: 50px;*/
+}
+.momentList{
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 50px;
+    background-color: transparent;
+}
+.rightUserMes{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-weight: bold;
+}
+.contentRight{
+    background-color: transparent;
+    width: 300px;
+    box-sizing: border-box;
+    display: inline-block;
+    position: absolute;
+    margin-left: 8px;
+    border-radius: 4px;
+}
+.homeAvatar{
+    width: 80px;
+    height: 80px;
+    margin: 2px;
+}
+.homeAvatar img{
+    height: 100%;
+    width: 100%;
+}
+.btnDefault{
+    background-color: #00adeb;
+    color: #ffffff;
+    border: 1px solid #00adeb;
+    border-radius: 5px;
+    padding: 4px 15px;
+    cursor: pointer;
+}
+.logout:hover{
+    cursor: pointer;
+}
+.userMes{
+    /*margin: 20px 0;*/
+    display: flex;
+    justify-content: space-around;
+    background-color: #fff;
+    padding: 30px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 3px rgb(18 18 18 / 10%);
+    border-radius: 4px;
+}
+.cover{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #000;
+    display: none;
+    filter: alpha(opacity=30);
+    opacity: 0.3;
+    z-index: 2;
+}
+.dialogDefault{
+    position: fixed;
+    background-color: #fff;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    box-shadow: 0 1px 3px rgb(18 18 18 / 10%);
+    z-index: 999;
+}
+.createMomentDialog{
+    height: 500px;
+    width: 800px;
+    display: none;
+
+}
+.editUserDialog{
+    height: 350px;
+    width: 500px;
+    display: none;
+}
+.editMomentDialog{
+    height: 500px;
+    width: 800px;
+    display: none;
+}
+.closeDialogBox, .closeEditMomentDialog, .closeAvatarDialog{
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    height: 30px;
+    width: 23px;
+}
+.closeDialogBox:hover, .closeEditMomentDialog:hover, .closeAvatarDialog:hover{
+    cursor: pointer;
+}
+.closeDialog {
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    background: #333;
+    transform: rotate(45deg);
+}
+
+.closeDialog::after {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: #333;
+    transform: rotate(-90deg);
+}
+.createTitle{
+    padding: 10px 20px;
+    border-bottom: 1px solid #00adeb;
+}
+.createLabel{
+    margin-bottom: 10px;
+    display: block;
+    font-weight: bold;
+}
+.textfield input, textarea{
+    -webkit-appearance:none;
+    -moz-appearance: none;
+    outline: 0;
+    height: 34px;
+    padding: 0 10px;
+    border-radius: 2px;
+    background-color:rgba(241,241,241,.98);
+    border: 1px solid #c8cccf;
+    color: #121212;
+}
+.textfield textarea{
+    height: 200px;
+    width: calc(100% - 22px);
+    padding: 10px;
+    resize: none;
+}
+.textfield input{
+    width: 300px;
+}
+.textfield input:focus, textarea:focus{
+    background-color: #fff;
+    border: 1px solid #8a8787;
+}
+.goTop{
+    height: 50px;
+    width: 50px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 110px;
+    margin-left: 800px;
+    display: none;
+    cursor: pointer;
+    border: 2px solid #1296db;
+}
+.goTop img{
+    height: 100%;
+    width: 100%;
+}
+.showDialogBtn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    position: relative;
+}
+.showDialogBtn button{
+    width: 60%;
+}
+.momentBottom{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.labels{
+    font-size: 12px;
+    color: #848fa5;
+    width: 450px;
+}
+.commentForm{
+    display: flex;
+    justify-content: space-between;
+}
+.addCommentInput, .replyCommentInput, .editUserInput{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: 0;
+    height: 34px;
+    padding: 0 10px;
+    border-radius: 4px;
+    border: 1px solid #c8cccf;
+    color: #121212;
+    width: 631px;
+    background-color: #f6f6f6;
+}
+.addCommentInput:focus, .replyCommentInput:focus, .editUserInput:focus {
+    background-color: #fff;
+    border: 1px solid #8a8787;
+}
+.addCommentBtn{
+    display: none;
+    height: 36px !important;
+}
+.comments{
+    text-align: center;
+    margin-top: 10px;
+}
+.showComments, .replyCommentBtn, .delComment, .editMoment, .delMoment{
+    border: none;
+    background-color: transparent;
+    outline: none;
+    color: #00adeb;
+    cursor: pointer;
+    margin: 5px 0;
+    font-size: 13px;
+}
+.noneComment{
+    color: #848fa5;
+    font-size: 13px;
+    cursor: default;
+}
+
+.commentList{
+    text-align: left;
+    font-size: 14px;
+    box-shadow: 0 1px 3px rgb(18 18 18 / 10%);
+    padding: 10px 10px;
+    border-radius: 4px;
+    border: 1px solid #ebebeb;
+    margin-bottom: 5px;
+}
+.commentItemBox{
+    padding: 15px;
+    border-bottom: 1px solid #f0f2f7;
+}
+.momentHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.commentContent{
+    margin-left: 32px;
+    margin-top: 10px;
+}
+.showCommentCount{
+    padding: 10px;
+    font-weight: bolder;
+    font-size: 14px; border-bottom: 1px solid #f0f2f7;
+}
+.reverse{
+    border: none;
+    background-color: transparent;
+    outline: none;
+    color: #00adeb;
+    cursor: pointer;
+    margin: 5px 0;
+}
+.replyForm{
+    display: flex;
+    justify-content: space-between;
+}
+.replyComment{
+    display: inline-block;
+}
+.delForm{
+    display: inline-block;
+    margin-left: 10px;
+}
+.submitMoment{
+    margin-top: 40px;
+    text-align: center;
+}

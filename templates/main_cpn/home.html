@@ -1,0 +1,144 @@
+{% extends 'main.html' %}
+
+{% block title %}
+    无名论坛 - 首页
+{% endblock %}
+
+{% block content %}
+    <div class="contentLeft">
+        <div class="title">
+            <span>动态列表({{ moment | length }})</span>
+        </div>
+        {% if moment %}
+            <ul class="momentList">
+            {% for item in moment %}
+                <li class="item">
+                    <div class="userHead">
+                        <div style="display: flex; align-items: center;">
+                            <div class="momentAvatar">
+                                {%
+                                    set userAvatar =
+                                        item['author']['avatarUrl']
+                                        if item['author']['avatarUrl'] != ''
+                                        else '../static/img/avatars/default.png'
+                                %}
+                                <img src="{{ userAvatar }}" alt="">
+                            </div>
+                            <div class="user">{{ item.author.name }}</div>
+                        </div>
+                    </div>
+                    <p class="contentValue">{{ item.content }}</p>
+                    <div class="momentBottom">
+                        <div class="labels">
+                            {% for label in item.labels %}
+                                <span>#{{ label['name'] }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="time">发表于: {{ item.createTime }}</div>
+                    </div>
+                    <div class="addComment">
+                        <form action="/addComment/{{ item.id }}"
+                              method="post" class="commentForm">
+                            <input type="text" name="path" value="/" style="display: none">
+                            <label>
+                                <input type="text"
+                                       placeholder="说些什么吧..."
+                                       class="addCommentInput"
+                                       name="commentContent">
+                            </label>
+                            <button type="submit"
+                                    class="btnDefault addCommentBtn">
+                                发布
+                            </button>
+                        </form>
+                    </div>
+                    <div class="comments">
+                        {% if item.commentCount > 0 %}
+                            <ul class="commentList" style="display: none">
+                                <div class="showCommentCount">
+                                    {{ item.commentCount }}条评论
+                                </div>
+                                {% for comment in item.commentList %}
+                                    <li class="commentItemBox">
+                                        <div class="momentHeader">
+                                            <div style="display:flex; align-items: center;">
+                                                {%
+                                                    set momentAvatar =
+                                                        comment.author.avatarUrl
+                                                        if comment.author.avatarUrl != ''
+                                                        else '../static/img/avatars/default.png'
+                                                %}
+                                                <img src="{{ momentAvatar }}" alt=""
+                                                     style="width: 24px;height: 24px;">
+                                                {% if comment.commentId %}
+                                                    <span style="margin-left: 9px;">
+                                                        <span>{{ comment.author.name }}</span>
+                                                        <span style="color: #8590a6;">回复</span>
+                                                        {% for replyComment in item.commentList %}
+                                                            {% if comment.commentId == replyComment.id %}
+                                                                <span>{{ replyComment.author.name }}</span>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </span>
+                                                {% else %}
+                                                    <span style="margin-left: 9px;">{{ comment.author.name }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <div style="color: #848fa5; font-size: 12px">
+                                                {{ comment.createTime }}
+                                            </div>
+                                        </div>
+                                        <div class="commentContent">
+                                            {{ comment.content }}
+                                        </div>
+                                        <div style="text-align: right">
+                                            <div class="replyComment" style="text-align: right">
+                                                <button class="replyCommentBtn">回复</button>
+                                            </div>
+                                        {% if session['userid'] == comment.author.id %}
+                                            <form action="/delComment/{{ comment.id }}" method="post" class="delForm">
+                                                <input type="text" name="path" value="/" style="display: none">
+                                                <button class="delComment">删除</button>
+                                            </form>
+                                        {% endif %}
+                                        </div>
+                                        <form class="replyForm" method="post" action="/replyComment/{{ item.id }}/{{ comment.id }}">
+                                            <input type="text" name="path" value="/" style="display: none">
+                                            <label>
+                                                <input type="text"
+                                                       class="replyCommentInput"
+                                                       style="width: 590px;
+                                                       display: none"
+                                                       name="content"
+                                                       placeholder="回复 {{ comment.author.name }}：">
+                                            </label>
+                                            <button type="submit"
+                                                    class="btnDefault replyCommentBtnSub"
+                                                    style="display:none;">
+                                                发布
+                                            </button>
+                                        </form>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <button class="showComments" tabindex="{{ item.commentCount }}">查看评论({{ item.commentCount }})</button>
+                        {% else %}
+                            <span class="noneComment">暂无评论</span>
+                        {% endif %}
+                    </div>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <div class="noneMoment">
+                <h3>暂无动态，快去发表你的动态吧</h3>
+                <button class="showDialog btnDefault">发表动态</button>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+    </script>
+{% endblock %}
